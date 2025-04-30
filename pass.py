@@ -3,10 +3,17 @@ import secrets
 import string
 from PIL import Image, ImageTk 
 def generate_password():
-    length = int(length_entry.get())  
-    characters = string.ascii_letters + string.digits + string.punctuation
-    password = ''.join(secrets.choice(characters) for _ in range(length))
-    result_label.config(text=password)
+    
+    if not length_entry.get().isdigit() or int(length_entry.get()) <= 7:
+        result_label.config(text="Please enter a valid length.")
+        return 
+    else:
+
+        length = int(length_entry.get())  
+        characters = string.ascii_letters + string.digits + string.punctuation
+        password = ''.join(secrets.choice(characters) for _ in range(length))
+        result_label.config(text=password)
+        return password
     
 window = tk.Tk()
 window.title("Password Generator")
