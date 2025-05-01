@@ -13,6 +13,18 @@ def generate_password():
         characters = string.ascii_letters + string.digits + string.punctuation
         password = ''.join(secrets.choice(characters) for _ in range(length))
         result_label.config(text=password)
+        with open("password.txt", "a") as f:
+            f.write(password+"\n")
+        length_entry.delete(0, tk.END)
+        length_entry.insert(0, str(length))
+        length_entry.focus_set()
+        length_entry.select_range(0, tk.END)
+        length_entry.icursor(tk.END)
+        length_entry.config(bg="lightgreen")
+        result_label.config(bg="lightgreen")
+        result_label.after(2000, lambda: result_label.config(bg="SystemButtonFace"))
+        length_entry.config(bg="SystemButtonFace")
+        
         return password
     
 window = tk.Tk()
